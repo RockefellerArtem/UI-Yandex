@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+
+public enum CubeType
+{
+    Default,
+    Small
+}
 
 public class Clickable : MonoBehaviour
 {
-
     [SerializeField] private AnimationCurve _scaleCurve;
     [SerializeField] private float _scaleTime = 0.25f;
     [SerializeField] private HitEffect _hitEffectPrefab;
@@ -13,16 +19,14 @@ public class Clickable : MonoBehaviour
 
     private int _coinsPerClick = 1;
 
-    // ????? ?????????? ?? Interaction ??? ????? ?? ??????
     public void Hit()
     {
         HitEffect hitEffect = Instantiate(_hitEffectPrefab, transform.position, Quaternion.identity);
         hitEffect.Init(_coinsPerClick);
-        _resources.CollectCoins(1, transform.position);
+        //_resources.CollectCoins(1, transform.position);
         StartCoroutine(HitAnimation());
     }
 
-    // ???????? ????????? ????
     private IEnumerator HitAnimation()
     {
         for (float t = 0; t < 1f; t += Time.deltaTime / _scaleTime)
@@ -34,10 +38,8 @@ public class Clickable : MonoBehaviour
         transform.localScale = Vector3.one;
     }
 
-    // ???? ????? ??????????? ?????????? ?????, ?????????? ??? ?????
     public void AddCoinsPerClick(int value)
     {
         _coinsPerClick += value;
     }
-
 }
