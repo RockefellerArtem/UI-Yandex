@@ -21,14 +21,13 @@ public class ControleStartAnimation : MonoBehaviour, IAnimation
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit)) 
         {
-            if (hit.collider.TryGetComponent(out ControleStartAnimation clickable)) 
+            if (hit.collider.TryGetComponent(out ControleStartAnimation clickable) && !EventSystem.current.IsPointerOverGameObject()) 
             {
                 _resources.CollectCoins(1, transform.position);
                 clickable.Hit();
                 gameObject.SetActive(false);
             }
         }
-
     }
     
     public void StartAnimation()

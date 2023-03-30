@@ -26,6 +26,16 @@ public class Clickable : MonoBehaviour
         //_resources.CollectCoins(1, transform.position);
         StartCoroutine(HitAnimation());
     }
+    
+    public void SetScale(float value)
+    {
+        transform.localScale = Vector3.one * value;
+    }
+    
+    public void AddCoinsPerClick(int value)
+    {
+        _coinsPerClick += value;
+    }
 
     private IEnumerator HitAnimation()
     {
@@ -36,10 +46,5 @@ public class Clickable : MonoBehaviour
             yield return null;
         }
         transform.localScale = Vector3.one;
-    }
-
-    public void AddCoinsPerClick(int value)
-    {
-        _coinsPerClick += value;
     }
 }

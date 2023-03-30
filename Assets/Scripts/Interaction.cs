@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Interaction : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Interaction : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit)) 
         {
-            if (hit.collider.TryGetComponent(out Clickable clickable)) 
+            if (hit.collider.TryGetComponent(out Clickable clickable) && !EventSystem.current.IsPointerOverGameObject()) 
             {
                 if (Input.GetMouseButtonDown(0)) 
                 {
